@@ -1,0 +1,261 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+:root {
+  --color-principal:#e5ebe9;
+  --color-primaria: #c1cfcf;
+  --color-quatro: #081539;
+  --color-tercearia: #bf4343;
+  --color-segundaria: #083939;
+  --color-quinta: #90c2f3;
+  --color-sombra-luz: hsla(180, 27%, 87%, 0.555);
+  --color-sombra: hsla(0, 0%, 0%, 0.425);
+  --color-background: var(--color-principal);
+  --color-text: var(--color-segundaria);
+  --color-restante: var(--color-tercearia);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "PT Serif", serif;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-segundaria) transparent;
+  font-size: 15px;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--color-principal);
+  overflow: hidden;
+}
+
+.cabecalho {
+  width: 100%;
+  /* height: 90%; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.titulo {
+  background: var(--color-quinta);
+  display: flex;
+  width: 90%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.tabela {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  width: 85%;
+  height: 90%;
+  display: flex;
+  gap: 11px;
+  flex-direction: column;
+  position: relative;
+}
+
+.tablesInd {
+  height: 50%;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.titulo-form {
+  top: 0;
+  left: 0;
+  padding: 10px 20px;
+  background-color: var(--color-quatro);
+  color: var(--color-principal);
+  border: none;
+  border-bottom-right-radius: 30px;
+  max-width: 20%;
+  text-align: center;
+  box-shadow: 4px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.titulos {
+  border: none;
+  width: 105%;
+  background: var(--color-segundaria);
+  color: var(--color-principal);
+  display: flex;
+  gap: 4px;
+  /* margin-top: 10px; */
+  padding: 21px;
+  height: 30px;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: -40px;
+  /* right: -15px; */
+  top: 25px;
+  font-size: 16px;
+}
+
+.titulos:nth-child(2) {
+  gap: 4px;
+  /* margin-top: 10px; */
+  padding: 21px;
+  height: 30px;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: -40px;
+  /* right: -15px; */
+  top: 50%;
+  font-size: 16px;
+}
+
+.titulos:after,
+.titulos:before {
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  content: "";
+  top: 100%;
+  border-style: solid;
+  border-color: transparent;
+}
+
+.titulos:after {
+  border-width: 16px 41px 0 0;
+  border-top-color: var(--color-segundaria);
+  right: 0;
+  top: 42px;
+}
+
+.titulos:before {
+  left: 0;
+  top: 42px;
+  border-width: 0 41px 16px 0;
+  border-right-color: var(--color-segundaria);
+}
+
+.titulos:hover {
+  border: none;
+}
+
+.tabela-diagnostico {
+  width: 95%;
+  display: flex;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.titulo-medico-tabela {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  /* height: 67px; */
+  padding: 15px;
+}
+
+.titulo-diagnostico-tabela {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 67px;
+  padding: 7px;
+  overflow-y: auto;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.titulos-tr {
+  width: 100%;
+  padding: 12px;
+  /* padding: 3px 24px 3px 24px; */
+  display: flex;
+  /* gap: 72px; */
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+}
+
+.titulos-tr th {
+  color: var(--color-segundaria);
+  width: 100%;
+}
+
+.titulos-td {
+  width: 100%;
+  padding: 12px;
+  /* padding: 3px 24px 3px 24px; */
+  display: flex;
+  /* gap: 72px; */
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+}
+
+td {
+  color: var(--color-segundaria);
+  width: 100%;
+  text-align: center;
+}
+
+.titulo-diagnostico-tabela {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  padding: 7px;
+  overflow-y: auto;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.buttonsTable {
+  width: 50px;
+  border: none;
+  background: none;
+}
+
+.Icon-button:nth-child(1) {
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--color-segundaria);
+}
+
+.Icon-button-x {
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--color-tercearia);
+}
+
+@media (max-width: 1080px) {
+  .tablesInd {
+    overflow: auto;
+  }
+  .titulos {
+    width: 100%;
+    left: 0;
+  }
+  .titulos:before {
+    display: none;
+  }
+  .titulos:after, .titulos:before {
+    display: none;
+  }
+}/*# sourceMappingURL=dashboardMedico.css.map */

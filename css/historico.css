@@ -1,0 +1,195 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+:root {
+  --color-principal:#e5ebe9;
+  --color-primaria: #c1cfcf;
+  --color-quatro: #081539;
+  --color-tercearia: #bf4343;
+  --color-segundaria: #083939;
+  --color-quinta: #90c2f3;
+  --color-sombra-luz: hsla(180, 27%, 87%, 0.555);
+  --color-sombra: hsla(0, 0%, 0%, 0.425);
+  --color-background: var(--color-principal);
+  --color-text: var(--color-segundaria);
+  --color-restante: var(--color-tercearia);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "PT Serif", serif;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-segundaria) transparent;
+}
+
+.cabeca-menu {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tables {
+  box-shadow: var(--color-sombra) 0px 10px 20px, var(--color-sombra) 0px 6px 6px;
+  width: 90%;
+  height: 90%;
+  border-radius: 25px 0px 25px 25px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.titulo-paciente {
+  border: none;
+  width: 105%;
+  background: var(--color-segundaria);
+  color: var(--color-principal);
+  display: flex;
+  gap: 4px;
+  /* margin-top: 10px; */
+  padding: 21px;
+  height: 30px;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: -40px;
+  /* right: -15px; */
+  top: 25px;
+  font-size: 16px;
+}
+
+.titulo-paciente:after,
+.titulo-paciente:before {
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  content: "";
+  top: 100%;
+  border-style: solid;
+  border-color: transparent;
+}
+
+.titulo-paciente:after {
+  border-width: 16px 45px 0 0;
+  border-top-color: var(--color-segundaria);
+  right: 0;
+  top: 42px;
+}
+
+.titulo-paciente:before {
+  left: 0;
+  top: 42px;
+  border-width: 0 41px 16px 0;
+  border-right-color: var(--color-segundaria);
+}
+
+.titulo-paciente:hover {
+  border: none;
+}
+
+.tabela-diagnostico {
+  width: 90%;
+  height: 60%;
+  overflow: auto;
+}
+
+.titulo-diagnostico-tabela {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 7px;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.titulos-tr {
+  width: 100%;
+  padding: 3px 22px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.titulos-tr th {
+  color: var(--color-segundaria);
+}
+
+i {
+  cursor: pointer;
+}
+
+.back {
+  border: none;
+  width: 97px;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-right: 15px solid var(--color-principal);
+  background: var(--color-restante);
+  color: var(--color-principal);
+  cursor: pointer;
+  display: flex;
+  gap: 4px;
+  height: 30px;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: -15px;
+  right: -15px;
+  top: 83px;
+  font-size: 18px;
+}
+
+.back:after,
+.back:before {
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  content: "";
+  top: 100%;
+  border-style: solid;
+  border-color: transparent;
+}
+
+.back:before {
+  left: 0;
+  top: 15px;
+  border-width: 0 15px 5px 0;
+  border-right-color: var(--color-segundaria);
+}
+
+.backn:hover {
+  border: none;
+}
+
+.tabela-body {
+  width: 90%;
+  height: 60%;
+  position: relative;
+  overflow: auto;
+}
+
+@media (max-width: 1080px) {
+  .tablesInd {
+    overflow: auto;
+  }
+  .titulo-paciente {
+    width: 100%;
+    left: 0;
+  }
+  .titulo-paciente:before {
+    display: none;
+  }
+  .titulo-paciente:after, .titulos:before {
+    display: none;
+  }
+}/*# sourceMappingURL=historico.css.map */

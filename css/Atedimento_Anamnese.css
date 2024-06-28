@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+:root {
+  --color-principal:#e5ebe9;
+  --color-primaria: #c1cfcf;
+  --color-quatro: #081539;
+  --color-tercearia: #bf4343;
+  --color-segundaria: #083939;
+  --color-quinta: #90c2f3;
+  --color-sombra-luz: hsla(180, 27%, 87%, 0.555);
+  --color-sombra: hsla(0, 0%, 0%, 0.425);
+  --color-background: var(--color-principal);
+  --color-text: var(--color-segundaria);
+  --color-restante: var(--color-tercearia);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "PT Serif", serif;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-segundaria) transparent;
+  font-size: 15px;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--color-principal);
+  overflow: hidden;
+}
+
+.conteudo-informacao {
+  display: flex;
+  height: 60%;
+  width: 100%;
+  overflow-y: scroll;
+  margin-top: 30px;
+  flex-direction: column;
+}
+
+.search-container-box {
+  position: relative;
+  width: 90%;
+  /* max-width: 961px; */
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.input-comentario {
+  width: 100%;
+  border: none;
+  padding: 37px 9px 4px 31px;
+  /* text-indent: 245px; */
+  resize: none;
+  background: var(--color-primaria);
+  color: var(--color-segundaria);
+  font-size: 18px;
+  line-height: 30px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  box-shadow: 5px 5px 5px var(--color-sombra);
+}
+
+.label-comentario {
+  position: absolute;
+  /* top: -4px; */
+  left: 0;
+  padding: 6px 30px;
+  background-color: var(--color-quinta);
+  color: var(--color-segundaria);
+  border: none;
+  border-bottom-right-radius: 30px;
+}
+
+.botao {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 30px;
+}
+
+.buttonPadrao {
+  outline: none;
+  cursor: pointer;
+  border: none;
+  padding: 0.8rem;
+  width: 200px;
+  margin: 0;
+  /* font-family: inherit; */
+  /* font-size: inherit; */
+  position: relative;
+  display: inline-block;
+  letter-spacing: 0.05rem;
+  font-weight: 700;
+  font-size: 17px;
+  border-radius: 500px;
+  overflow: hidden;
+  background: var(--color-quinta);
+  color: var(--color-principal);
+}
+
+.buttonPadrao span {
+  position: relative;
+  z-index: 10;
+  transition: color 0.4s;
+}
+
+.buttonPadrao:hover span {
+  color: var(--color-segundaria);
+}
+
+.buttonPadrao::before,
+.buttonPadrao::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.buttonPadrao::before {
+  content: "";
+  background: var(--color-segundaria);
+  width: 120%;
+  left: -10%;
+  transform: skew(30deg);
+  transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+
+.buttonPadrao:hover::before {
+  transform: translate3d(100%, 0, 0);
+}/*# sourceMappingURL=Atedimento_Anamnese.css.map */

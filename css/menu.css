@@ -1,0 +1,938 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+:root {
+  --color-principal:#e5ebe9;
+  --color-primaria: #c1cfcf;
+  --color-quatro: #081539;
+  --color-tercearia: #bf4343;
+  --color-segundaria: #083939;
+  --color-quinta: #90c2f3;
+  --color-sombra-luz: hsla(180, 27%, 87%, 0.555);
+  --color-sombra: hsla(0, 0%, 0%, 0.425);
+  --color-background: var(--color-principal);
+  --color-text: var(--color-segundaria);
+  --color-restante: var(--color-tercearia);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "PT Serif", serif;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--color-principal);
+  overflow: hidden;
+}
+
+/* calendario */
+.divmedico {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px;
+  height: 150px;
+  gap: 12px;
+}
+
+.Nome-usuario {
+  color: var(--color-segundaria);
+  font-family: "PT Serif", serif;
+  font-size: 20px;
+}
+
+.containerbuscar {
+  display: flex;
+  background-color: var(--color-principal);
+  border-radius: 15px;
+  padding: 2px 2px 2px;
+  /* height: 150px; */
+  position: relative;
+  height: 35px;
+  width: 250px;
+  position: relative;
+  overflow: hidden;
+  justify-content: space-between;
+  transition: 0.5s;
+}
+
+.containerbuscar .lupapesquisar, .containerbuscar .xpesquisar {
+  /* min-width: 10px; */
+  /* height: 10px; */
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  cursor: pointer;
+}
+
+.containerbuscar .xpesquisar i {
+  font-size: 19px;
+  padding: 3px 0px 6px 1px;
+  color: black;
+}
+
+.containerbuscar .lupapesquisar i {
+  font-size: 18px;
+  margin-right: 3px;
+  /* height: 30px; */
+  /* margin-left: 1px; */
+  padding: 3px 0px 3px 5px;
+  color: black;
+}
+
+.containerbuscar .inputpesquisarcontainet {
+  padding: 3px 0px 0px;
+  margin-left: 2px;
+  overflow: hidden;
+}
+
+.containerbuscar .inputpesquisarcontainet input {
+  border: 0;
+  outline: 0;
+  font-size: 15px;
+}
+
+.cabeça {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wrap {
+  display: flex;
+  height: 98vh;
+  width: 95%;
+  overflow: hidden;
+  /* margin-left: 50px; */
+  margin-top: 10px;
+  border-radius: 26px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.wrap .medicos {
+  width: 350px;
+  padding: 5px;
+}
+
+.dia-semana {
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  transition: width 0.6s;
+  padding: 8px;
+  font-family: "PT Serif", serif;
+}
+
+.mes-data {
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  transition: width 0.6s;
+  font-family: "PT Serif", serif;
+}
+
+.calendHead {
+  display: flex;
+  height: 50px;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.setasemanaanterio {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.calendarrioagen {
+  outline: none;
+  border: none;
+}
+
+.Campo-Pesquisar {
+  display: flex;
+  line-height: 28px;
+  margin-top: 20px;
+  align-items: center;
+  position: relative;
+  max-width: 220px;
+}
+
+.Input-Pesquisar {
+  width: 100%;
+  height: 40px;
+  line-height: 28px;
+  padding: 0 1rem;
+  padding-left: 2.5rem;
+  border: 1px solid var(--color-segundaria);
+  border-radius: 17px;
+  outline: none;
+  background-color: var(--color-principal);
+  color: var(--color-segundaria);
+  transition: 0.3s ease;
+}
+
+.Input-Pesquisar::-moz-placeholder {
+  color: var(--color-segundaria);
+}
+
+.Input-Pesquisar::placeholder {
+  color: var(--color-segundaria);
+}
+
+.Input-Pesquisar:focus,
+.Input-Pesquisar:hover {
+  outline: none;
+  border-color: 1px var(--color-tercearia);
+  background-color: var(--color-principal);
+  box-shadow: 0 0 0 2px var(--color-sombra);
+}
+
+.icon-pesquisar {
+  position: absolute;
+  left: 1rem;
+  fill: var(--color-segundaria);
+  width: 1rem;
+  height: 1rem;
+}
+
+.medicosDisp {
+  margin-top: 90px;
+  /* margin-bottom: 30px; */
+  gap: 15px;
+  display: flex;
+  /* background: var(--color-primaria); */
+  flex-direction: column;
+  max-height: 350px;
+  overflow-y: auto;
+  scrollbar-color: var(--color-primaria) var(--color-shadow);
+  align-items: center;
+}
+
+.medicosOff {
+  margin-top: 90px;
+  /* margin-bottom: 30px; */
+  gap: 15px;
+  display: flex;
+  /* background: var(--color-primaria); */
+  flex-direction: column;
+  height: 350px;
+  align-items: center;
+}
+
+.calendarrioagen[type=date] {
+  /* Desativar a aparência padrão */
+  appearance: textfield;
+  /* Remover seta */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: none;
+  appearance: none;
+  padding: 0px 8px;
+  border-radius: 5px;
+  width: 40px;
+  content: "📅"; /* Código Unicode para o ícone do calendário */
+  font-size: 1.2em; /* Tamanho do ícone */
+}
+
+.calhhorariocampo {
+  background: rgba(41, 30, 30, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.day-header {
+  background: var(--color-quinta);
+  color: var(--color-segundaria);
+}
+
+#horarios {
+  background-color: var(--color-quinta);
+  color: var(--color-segundaria);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+tr .testando {
+  background: var(--color-principal);
+}
+
+.testando {
+  height: 65px;
+  padding: 10px;
+}
+
+.agenda {
+  background: var(--color-segundaria);
+  color: var(--color-primaria);
+  padding: 6px 4px 6px;
+  overflow-wrap: break-word;
+  width: 100%;
+  gap: 10px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  border-radius: 10px;
+  flex-direction: column;
+  align-content: flex-start;
+  justify-content: space-between;
+}
+
+.icone-agendamento {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  cursor: pointer;
+}
+
+.cardMedico {
+  display: flex;
+  isolation: isolate;
+  position: relative;
+  margin-left: 9px;
+  width: 17rem;
+  height: 6rem;
+  /* background: #9e00af; */
+  border-radius: 1rem;
+  cursor: pointer;
+  --gradient: linear-gradient(to bottom, #2eadff, #3d83ff, #7e61ff);
+  /* align-items: center; */
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  font-family: "PT Serif", serif;
+}
+
+.cardMedico:before {
+  position: absolute;
+  content: "";
+  inset: 0.0625rem;
+  border-radius: 0.9375rem;
+  background: var(--color-segundaria);
+  z-index: 2;
+}
+
+.cardMedico:after {
+  position: absolute;
+  content: "";
+  width: 0.25rem;
+  inset: 0.65rem auto 0.65rem 0.5rem;
+  border-radius: 0.125rem;
+  background: var(--color-quinta);
+  transition: transform 300ms ease;
+  z-index: 4;
+}
+
+.medicodisp {
+  color: var(--color-principal);
+  padding: 0.65rem 0.25rem 0.4rem 1.25rem;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: transform 300ms ease;
+  z-index: 5;
+  font-family: "PT Serif", serif;
+}
+
+.cardMedico:hover .medicodisp {
+  transform: translateX(0.15rem);
+}
+
+.especialidade-medico {
+  color: var(--color-principal);
+  padding: 0 1.25rem;
+  transition: transform 300ms ease;
+  z-index: 5;
+  font-family: "PT Serif", serif;
+}
+
+.cardMedico:hover .especialidade-medico {
+  transform: translateX(0.15rem);
+}
+
+.wrap .divCalendario {
+  width: 85%;
+  color: black;
+  overflow-y: auto;
+  scrollbar-color: var(--color-primaria) var(--color-shadow);
+}
+
+.TRClass {
+  padding: 10px 0px;
+  color: var(--color-primaria);
+}
+
+section table {
+  margin: 0;
+}
+
+th {
+  padding: 10px 0px;
+  color: var(--color-primaria);
+}
+
+.HoraClass {
+  background: var(--color-segundaria);
+  width: 130px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+}
+
+.calendario {
+  width: 90%;
+  background: var(--color-segundaria);
+  table-layout: fixed;
+  margin-left: 50px;
+}
+
+.calendario thead {
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.calendario tbody {
+  position: relative;
+}
+
+.calendario td {
+  text-align: center;
+}
+
+/* Tabela de exibição */
+.index {
+  top: 0;
+  left: 0;
+  padding: 10px 20px;
+  background-color: #B4EE9E;
+  color: white;
+  border: none;
+  border-bottom-right-radius: 30px;
+  max-width: 60%;
+  text-align: center;
+  box-shadow: 4px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.exibicao {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+  background-color: white;
+  margin-bottom: 1vh;
+  color: #11101d;
+}
+
+.buttonsTable {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: rgb(0, 0, 0);
+  width: 50%;
+}
+
+.buttonsTable i {
+  margin-right: 10px;
+}
+
+h3 {
+  margin-left: 15px;
+  color: var(--color-segundaria);
+  font-family: "PT Serif", serif;
+}
+
+.exibicao2 {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: left;
+  background-color: white;
+  margin-bottom: 5vh;
+  color: #11101d;
+}
+
+.exibicao2 th,
+td {
+  padding: 4px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 24px 0px, rgb(51, 51, 51) 0px 0px 0px 2px;
+}
+
+.exibicao2 th[scope=col] {
+  text-align: center;
+}
+
+.conteudoPrincipal {
+  background-color: #ffffff;
+  min-height: 100%;
+  display: flex;
+  color: #11101d;
+}
+
+.centro {
+  margin: auto;
+  min-height: 100vh;
+  width: 90%;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* modal */
+.Agendar-horario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.input-modal {
+  background: transparent;
+  /* width: auto; */
+  /* max-width: 289px; */
+  font-size: 17px;
+  color: var(--color-segundaria);
+  height: 45px;
+  padding: 12px;
+  border: none;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0px 0px 20px -18px;
+}
+
+.input-modal:hover {
+  border: none;
+  box-shadow: 0px 0px 20px -17px;
+}
+
+.input-modal:active {
+  transform: scale(0.95);
+}
+
+.input-modal:focus {
+  border: none;
+}
+
+.AgendarForme {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  overflow: hidden;
+  gap: 30px;
+  padding: 25px;
+}
+
+.radio-buttons-container {
+  display: flex;
+  /* align-items: center; */
+  gap: 15px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.radio-button {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.radio-button__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.radio-button__label {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: var(--color-segundaria);
+}
+
+.radio-button__label:nth-child(2) {
+  display: inline-block;
+  padding-left: 30px;
+  margin-bottom: 10px;
+  position: relative;
+  font-size: 16px;
+  color: var(--color-segundaria);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.radio-button__custom {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #555;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.radio-button__input:checked + .radio-button__label .radio-button__custom {
+  transform: translateY(-50%) scale(0.9);
+  border: 5px solid var(--color-quinta);
+}
+
+.radio-button__input:checked + .radio-button__label {
+  color: var(--color-quinta);
+}
+
+.radio-button__label:hover .radio-button__custom {
+  transform: translateY(-50%) scale(1.2);
+  border-color: #4c8bf5;
+  box-shadow: 0 0 10px rgba(76, 139, 245, 0.5019607843);
+}
+
+.botao-insc {
+  outline: none;
+  cursor: pointer;
+  border: none;
+  padding: 0.8rem 6.9rem;
+  margin: 0;
+  /* font-family: inherit; */
+  /* font-size: inherit; */
+  position: relative;
+  display: inline-block;
+  letter-spacing: 0.05rem;
+  font-weight: 700;
+  font-size: 17px;
+  border-radius: 500px;
+  overflow: hidden;
+  background: var(--color-quinta);
+  color: var(--color-segundaria);
+}
+
+.botao-insc span {
+  position: relative;
+  z-index: 10;
+  transition: color 0.4s;
+}
+
+.botao-insc:hover span {
+  color: var(--color-segundaria);
+}
+
+.botao-insc::before,
+.botao-insc::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.botao-insc::before {
+  content: "";
+  background: var(--color-primaria);
+  width: 120%;
+  left: -10%;
+  transform: skew(30deg);
+  transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+
+.botao-insc:hover::before {
+  transform: translate3d(100%, 0, 0);
+}
+
+.modal-editar-agenda {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.agendar {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-editar-agenda {
+  display: none;
+  flex-direction: column;
+  flex-wrap: wrap;
+  overflow: hidden;
+  gap: 40px;
+}
+
+.modal-content {
+  background-color: var(--color-principal);
+  margin: 15% auto;
+  max-width: 800px;
+  /* border-radius: 8px; */
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 19px;
+}
+
+.modal-label {
+  font-size: 16px;
+}
+
+.inputForm {
+  align-items: center;
+  padding-left: 10px;
+  width: 313px;
+  background: var(--color-principal);
+  transition: 0.2s ease-in-out;
+  border: 1px solid var(--color-segundaria);
+  border-radius: 15px;
+  text-align: center;
+}
+
+.input-modal-nome {
+  align-items: center;
+  padding-left: 10px;
+  background: var(--color-principal);
+  width: 400px;
+  transition: 0.2s ease-in-out;
+  border: 1px solid var(--color-segundaria);
+  border-radius: 15px;
+}
+
+.inputForm-horario {
+  align-items: center;
+  padding-left: 10px;
+  background: var(--color-principal);
+  width: 200px;
+  transition: 0.2s ease-in-out;
+  border: 1px solid var(--color-segundaria);
+  border-radius: 15px;
+}
+
+.inputForm-numero {
+  align-items: center;
+  padding-left: 10px;
+  width: 308px;
+  background: var(--color-principal);
+  transition: 0.2s ease-in-out;
+  border: 1px solid var(--color-segundaria);
+  /* border: 1px solid; */
+  border-radius: 15px;
+}
+
+.inputForm-medico {
+  align-items: center;
+  padding-left: 10px;
+  width: 300px;
+  background: var(--color-principal);
+  transition: 0.2s ease-in-out;
+  border: 1px solid var(--color-segundaria);
+  /* border: 1px solid; */
+  border-radius: 15px;
+}
+
+.close {
+  color: var(--color-restante);
+  position: absolute;
+  right: 15px;
+  margin-left: 0px;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.label-modal {
+  border-right: 2px solid var(--color-restante);
+  padding: 0px 7px 0px 0px;
+  color: var(--color-segundaria);
+}
+
+input:-webkit-autofill {
+  background: none;
+}
+
+.titulo-agendamento {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0px;
+  position: relative;
+  background: var(--color-quinta);
+  width: 100%;
+  height: 80px;
+  border-radius: 15px 17px 0px 0px;
+}
+
+.titulo- {
+  border-bottom: 3px solid var(--color-segundaria);
+}
+
+.Editar-agendamento {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  overflow: hidden;
+  gap: 35px;
+  padding: 30px;
+}
+
+.titulo-editar-agendamento {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0px;
+  position: relative;
+  background: var(--color-quinta);
+  width: 100%;
+  height: 70px;
+  border-radius: 15px 17px 0px 0px;
+}
+
+.modal-content-editar {
+  background-color: var(--color-principal);
+  margin: 15% auto;
+  max-width: 800px;
+  /* border-radius: 8px; */
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 19px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-primaria);
+}
+
+/* Modal styles */
+.modal-olho {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 60px;
+}
+
+.modal-conteudo-olho {
+  background-color: var(--color-principal);
+  margin: 5% auto;
+  /* padding: 20px; */
+  border-radius: 21px;
+  width: 60%;
+  height: 40%;
+}
+
+.titulo-olho {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0px;
+  position: relative;
+  background: var(--color-quinta);
+  width: 100%;
+  height: 45px;
+  border-radius: 15px 17px 0px 0px;
+}
+
+.informacao-olho {
+  height: 80%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  gap: 58px;
+  /* position: relative; */
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.texto-olho {
+  color: var(--color-quatro);
+  font-size: 24px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-segundaria);
+}
+
+.close {
+  color: var(--color-quatro);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: var(--color-tercearia);
+  text-decoration: none;
+  cursor: pointer;
+}/*# sourceMappingURL=menu.css.map */

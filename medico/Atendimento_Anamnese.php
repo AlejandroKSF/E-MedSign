@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='../css/Atedimento_Anamnese.scss' rel='stylesheet'>
+    <link href='../css/Atedimento_Menu.scss' rel='stylesheet'>
+    <link href='../css/navibar.scss' rel='stylesheet'>
+    <script src="../script/onclick.js" defer></script>
+    <script src="../script/navbar.js" defer></script>
+    <title>Inicio Médico</title>
+
+</head>
+
+
+<body>
+
+    <?php
+    include ('../main.php');
+
+    $idAgendamento = isset($_GET['id']) ? $_GET['id'] : null;
+    $paciente = isset($_GET['cpf']) ? $_GET['cpf'] : null;
+
+
+    if ($idAgendamento && $paciente) {
+        // Função que verifica se o ID do agendamento corresponde ao paciente
+        function verificarAgendamento($idAgendamento, $paciente) {
+            include('../connect.php');
+            $conn = $conexao;
+            if ($conn->connect_error) {
+                die("Conexão falhou: " . $conn->connect_error);
+            }
+
+            $sql = "SELECT COUNT(*) as count FROM tb_agendamento WHERE cd_agendamento = ? AND cd_paciente = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ii", $idAgendamento, $paciente);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+
+            $stmt->close();
+            $conn->close();
+
+            return $row['count'] > 0;
+        }
+
+        if (!verificarAgendamento($idAgendamento, $paciente)) {
+            // Redireciona para a página de erro se o agendamento não corresponder ao paciente
+            header('Location: ../acesso_negado.php');
+            exit();
+        }
+
+        $result1 = infoPaciente($paciente);
+    }
+    include ("../navibar.php");
+
+    session_start();
+    if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'medico') {
+        // Redireciona para a página de erro de acesso negado
+        header('Location: ../acesso_negado.php');
+        exit(); // Certifica-se de que o script pare de executar após o redirecionamento
+    }
+    $menu = generateMenu($_SESSION['user_type'], $permissions);
+
+    // Imprimir o menu
+    echo $menu;
+
+    ?>
+
+    <main class="cabeca-menu">
+        <div class="tables">
+            <ul class="links-menu-atedimento">
+
+                <a class="menu active" href="./Atendimento_Anamnese.php?id=<?= $idAgendamento ?>&cpf=<?= $paciente ?>">
+                    <li> <span>Anamnese </span></li>
+                </a>
+                <a class="menu " href="./Atendimento_Diagnostico.php?id=<?= $idAgendamento ?>&cpf=<?= $paciente ?>">
+                    <li> <span>Diagnóstico</span></li>
+                </a>
+                <a class="menu" href="./Atendimento_Prescricao.php?id=<?= $idAgendamento ?>&cpf=<?= $paciente ?>">
+                    <li> <span>Prescrição</span></li>
+                </a>
+                <a class="menu" href="./Atendimento_Atestado.php?id=<?= $idAgendamento ?>&cpf=<?= $paciente ?>">
+                    <li> <span>Atestado</span></li>
+                </a>
+                <a class="menu" href="./finalizar_atendimento.php?id=<?= $idAgendamento ?>&cpf=<?= $paciente ?>">
+                    <li> <span>Finalizar atendimento</span></li>
+                </a>
+
+            </ul>
+            <button onclick="goBack()" class="back"><i class="bi bi-backspace"></i>Voltar</button>
+            <div class="titulo">
+                <h1>Nome do paciente</h1>
+            </div>
+            <div id="dynamic-form" class="conteudo-informacao">
+                <!-- Textareas dinâmicos serão adicionados aqui -->
+            </div>
+            <div class="botao">
+                <button class="buttonPadrao" onclick="gerarPDFAnamnese('<?= $paciente ?>','<?= $idAgendamento ?>')">
+                    <span>Salvar</span></button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const pacienteCpf = urlParams.get('cpf');
+
+            fetch(`buscaconfig.php?cpf=${pacienteCpf}`)
+                .then(response => response.json())
+                .then(data => {
+                    const dynamicForm = document.getElementById('dynamic-form');
+                    const fieldNames = {
+                        'QP': 'Queixa Principal e duração',
+                        'Hda': 'História pregressa da moléstia atual',
+                        'Hpp': 'História pessoal e social',
+                        'HistFam': 'História familiar',
+                        'Medicamentos': 'Medicamentos em uso',
+                        'Alergias': 'Alergias',
+                        'Observacoes': 'Observações',
+                        'InfGerais': 'Informações gerais',
+                        'CabecaPescoço': 'Cabeça e pescoço',
+                        'Torax': 'Tórax',
+                        'Mmss': 'Membros superiores',
+                        'Abdome': 'Abdômen',
+                        'MMII': 'Membros inferiores',
+                        'AuscPulmonar': 'Ausculta pulmonar',
+                        'AuscCardiaca': 'Ausculta cardíaca',
+                        'PA': 'Pressão arterial',
+                        'FC': 'Frequência cardíaca',
+                        'FR': 'Frequência respiratória',
+                        'Tax': 'Temperatura',
+                        'Saturacao': 'Saturação de oxigênio',
+                        'PesoAltura': 'Peso e altura',
+                        'ObsFinaisAntro': 'Observações antropométricas',
+                        'Cd': 'Circunferência do pescoço',
+                        'CircunfAbdominal': 'Circunferência abdominal',
+                        'ObsFinaisExa': 'Observações finais do exame',
+                        'HipDiagnostica': 'Hipótese diagnóstica',
+                        'ResumoAtendimento': 'Resumo do atendimento'
+                    };
+
+                    const config = data.config;
+                    const isFirstAppointment = data.isFirstAppointment;
+
+                    for (const field in config) {
+                        if (isFirstAppointment) {
+                            if (config[field].Primeira) {
+                                renderField(dynamicForm, field, fieldNames[field]);
+                            }
+                        } else {
+                            if (config[field].Repetir) {
+                                renderField(dynamicForm, field, fieldNames[field]);
+                            }
+                        }
+                    }
+                })
+                .catch(error => console.error('Erro:', error));
+        });
+
+        function renderField(dynamicForm, field, fieldName) {
+            const textareaContainer = document.createElement('div');
+            textareaContainer.className = 'search-container-box';
+
+            const textarea = document.createElement('textarea');
+            textarea.className = 'input-comentario';
+            textarea.name = field;
+            textarea.id = field;
+            textarea.placeholder = fieldName;
+            textarea.rows = 5;
+            textarea.cols = 33;
+
+            const label = document.createElement('label');
+            label.className = 'label-comentario';
+            label.textContent = fieldName;
+
+            textareaContainer.appendChild(textarea);
+            textareaContainer.appendChild(label);
+            dynamicForm.appendChild(textareaContainer);
+        }
+
+
+
+        
+
+        function goBack() {
+            window.history.back();
+        }
+
+    </script>
+</body>
+
+</html>

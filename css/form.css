@@ -1,0 +1,243 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+:root {
+  --color-principal:#e5ebe9;
+  --color-primaria: #c1cfcf;
+  --color-quatro: #081539;
+  --color-tercearia: #bf4343;
+  --color-segundaria: #083939;
+  --color-quinta: #90c2f3;
+  --color-sombra-luz: hsla(180, 27%, 87%, 0.555);
+  --color-sombra: hsla(0, 0%, 0%, 0.425);
+  --color-background: var(--color-principal);
+  --color-text: var(--color-segundaria);
+  --color-restante: var(--color-tercearia);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "PT Serif", serif;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-segundaria) transparent;
+  font-size: 15px;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--color-principal);
+  overflow: hidden;
+}
+
+.tela-inicial {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.titulo {
+  border: none;
+  width: 105%;
+  background: var(--color-segundaria);
+  color: var(--color-principal);
+  display: flex;
+  gap: 4px;
+  /* margin-top: 10px; */
+  padding: 21px;
+  height: 30px;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: -40px;
+  /* right: -15px; */
+  top: 25px;
+  font-size: 16px;
+}
+
+.titulo:after,
+.titulo:before {
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  content: "";
+  top: 100%;
+  border-style: solid;
+  border-color: transparent;
+}
+
+.titulo:after {
+  border-width: 16px 41px 0 0;
+  border-top-color: var(--color-segundaria);
+  right: 0;
+  top: 42px;
+}
+
+.titulo:before {
+  left: 0;
+  top: 42px;
+  border-width: 0 41px 16px 0;
+  border-right-color: var(--color-segundaria);
+}
+
+.titulo:hover {
+  border: none;
+}
+
+.tables {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 80%;
+  position: relative;
+  /* border: 1px solid; */
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.formulario {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  padding: 15px;
+  overflow: hidden;
+  gap: 4px;
+  margin-top: 50px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: relative;
+  overflow: auto;
+}
+
+h3 {
+  width: 100%;
+}
+
+.infor-formulario:nth-child(5) .title:nth-child(1) {
+  width: 150px;
+}
+
+.infor-formulario:nth-child(8) .title:nth-child(1) {
+  width: 150px;
+}
+
+.infor-formulario:nth-child(10) .title:nth-child(1) {
+  width: 150px;
+}
+
+label {
+  font-size: 18px;
+  font-style: normal;
+}
+
+.infor-formulario {
+  display: flex;
+  width: 45%;
+  height: 43%;
+  /* align-items: center; */
+  padding: 7px;
+  gap: 8px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  padding: 15px;
+}
+
+.formulario .infor-formulario:nth-child(1) {
+  width: 400px;
+  height: 250px;
+}
+.formulario .infor-formulario:nth-child(2) {
+  width: 400px;
+  height: 250px;
+}
+.formulario .infor-formulario:nth-child(3) {
+  width: 400px;
+  height: 250px;
+  position: relative;
+}
+.formulario .infor-formulario:nth-child(4) {
+  width: 400px;
+  height: 250px;
+}
+.formulario .infor-formulario:nth-child(5) {
+  width: 400px;
+}
+.formulario .infor-formulario:nth-child(6) {
+  width: 400px;
+}
+
+.titulo-formulario {
+  font-size: 20px;
+  width: 100%;
+  text-align: center;
+  font-weight: 700;
+  border-bottom: 2px solid var(--color-quinta);
+}
+
+.botao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonPadrao {
+  outline: none;
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem;
+  width: 200px;
+  margin: 0;
+  /* font-family: inherit; */
+  /* font-size: inherit; */
+  position: relative;
+  display: inline-block;
+  letter-spacing: 0.05rem;
+  font-weight: 700;
+  font-size: 17px;
+  border-radius: 500px;
+  overflow: hidden;
+  background: var(--color-quinta);
+  color: var(--color-segundaria);
+}
+
+.buttonPadrao span {
+  position: relative;
+  z-index: 10;
+  transition: color 0.4s;
+}
+
+.buttonPadrao:hover span {
+  color: var(--color-segundaria);
+}
+
+.buttonPadrao::before,
+.buttonPadrao::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.buttonPadrao::before {
+  content: "";
+  background: var(--color-primaria);
+  width: 120%;
+  left: -10%;
+  transform: skew(30deg);
+  transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+
+.buttonPadrao:hover::before {
+  transform: translate3d(100%, 0, 0);
+}/*# sourceMappingURL=form.css.map */

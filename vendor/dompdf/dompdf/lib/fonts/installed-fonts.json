@@ -1,0 +1,9 @@
+{
+    "comfortaa": {
+        "300": "C:\\xampp\\htdocs\\vendor\\dompdf\\dompdf\/lib\/fonts\/comfortaa_300_24487218bc4c01bdf12107d028350348",
+        "normal": "C:\\xampp\\htdocs\\vendor\\dompdf\\dompdf\/lib\/fonts\/comfortaa_normal_08c28694b8d80b5cdc5eca356310885d",
+        "500": "C:\\xampp\\htdocs\\vendor\\dompdf\\dompdf\/lib\/fonts\/comfortaa_500_a58c88edcadf7054d729ad67ce6504a6",
+        "600": "C:\\xampp\\htdocs\\vendor\\dompdf\\dompdf\/lib\/fonts\/comfortaa_600_da888b9ba776a706e10ad1537e043c16",
+        "bold": "comfortaa_bold_4fdc0540161fe511b7df4d8fcc5bcd0a"
+    }
+}
